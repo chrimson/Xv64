@@ -1,0 +1,95 @@
+
+Final Project: Multi-Level Page Tables
+Chris Limson, climson@gmu.edu
+Saturday, May 14, 2022
+GMU CYSE 570 Fundamentals of Operating Systems
+Prof. Mohamed Gebril - Venkat Sachith Rachapudi, TA
+                                                     
+---------------------- README ----------------------
+ 
+Assumes very basic Linux operation, like installing Ubuntu, copying files to working directory and editing files.
+
+Unzipped project may still need to change permissions of Perl scripts:
+chmod u+x sign.pl vectors32.pl vectors64.pl
+
+QEMU, GCC and MAKE also need to be installed. 
+ 
+
+---- PART I. 32-bit xv6 ----
+
+1. On Ubuntu 20.04 64-bit environment with 2 CPUs, verify that platform is 64-bit with x86_64
+uname -a
+
+2. In decompressed directory with C and assembly code files, open Makefile. In the first two lines, ensure that OS = 32 and QA = 32. Save and close Makefile
+
+3. Start from clean sandbox, run QEMU
+make clean
+make qemu
+
+4. Test basic OS commands
+ls
+echo Hello xv6!
+cat README
+mkdir sub
+ls
+cd sub
+../ls
+../echo Hello CYSE 570! > file1.txt
+../echo Goodbye > file2.txt
+../cat file1.txt file2.txt > file3.txt
+../cat file3.txt
+../ls ..
+../grep README ../README
+<ctrl-a> c q <enter>
+
+5. Edit first two lines in Makefile so that OS = 32 and QA = 64
+
+6. Run the same OS on 64-bit QEMU architecture
+make qemu
+
+7. Test with similar commands as step 4
+
+
+--- PART II. 64-bit xv6 ---
+
+8. Set OS = 64 and QA = 64
+
+9. Clean previous compile. Compile incrementally and run
+make clean
+make bootblock
+make kernel
+make xv6.img
+make fs.img
+make qemu
+
+10. Test
+
+11. Try OS = 64, QA = 32
+
+12. Try to run QEMU
+
+
+--- PART III. 64-bit xv6 on 32-bit hardware ---
+
+13. On Ubuntu 16.04 32-bit environment with 2 CPUs, verify that platform is 32-bit with i686
+uname -a
+
+14. OS = 64, QA = 64
+
+15. Clean, run
+make clean
+make qemu
+
+16. Test
+ls
+echo 64-bit emulator > file1.txt
+echo 32-bit hardware > file2.txt
+echo CYSE570 rocks 64 times! > file3.txt
+cat file1.txt file2.txt file3.txt > file4.txt
+cat file4.txt
+<ctrl-a> c q <enter>
+
+17. Try OS = 64, QA = 32
+
+18. Try to run QEMU
+
